@@ -125,6 +125,29 @@ npm run dev
 └─────────────┘
 ```
 
+### Project Workflow Overview
+
+1. **Onboarding** (`/`)
+   - User lands on the welcome screen, reviews feature highlights, and chooses **Sign up** or **Login**.
+2. **Account Access** (`/signup` or `/login`)
+   - Both routes consolidate to the shared phone-auth form with country code selector.
+   - After entering a phone number the user advances to OTP verification.
+3. **Verification** (`/signup/otp`)
+   - User enters the four-digit code, can resend after 60 seconds, and continues when verified.
+4. **Profile Creation** (`/signup/profile`)
+   - User supplies profile metadata and confirms setup, leading to the home dashboard.
+5. **Home Dashboard** (`/home`)
+   - Central hub offering quick actions: start a new meeting, schedule one, or enter an invite code.
+   - Sidebar reveals navigation shortcuts, search, and recent meetings.
+6. **Meeting Entry Paths**
+   - **Instant Meeting**: `New meeting → Get instant code` opens a bottom sheet with share/copy actions and then proceeds to `/meeting`.
+   - **Scheduled Meeting**: `New meeting → Schedule meeting` directs to `/schedule` to plan future sessions.
+   - **Join via Code**: `Enter code to join` or `/join` lets the user input an invite code, then transitions to `/meeting`.
+7. **Live Meeting** (`/meeting`)
+   - Real-time session controls, waveform visualization, participant management, audio recordings sheet, and sidebar access.
+8. **Post-Meeting** (`/transcript`)
+   - Ending the meeting routes to transcript review with tabs for raw text and summaries, sharing options, and recent-meeting sidebar.
+
 ### Detailed Page Descriptions
 
 #### 1. **Landing Page** (`/`)

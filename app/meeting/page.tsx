@@ -239,7 +239,7 @@ export default function MeetingPage() {
 
           {/* End Call Button */}
           <Link
-            href="/home"
+            href="/transcript"
             className="w-24 h-14 rounded-full bg-gradient-to-br from-[#8B6F47] to-[#5C4033] flex items-center justify-center hover:opacity-90 active:scale-95 transition-all shadow-lg hover:shadow-xl"
           >
             <svg

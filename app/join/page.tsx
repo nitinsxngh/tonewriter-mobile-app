@@ -4,17 +4,17 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 export default function JoinPage() {
-  const [meetingCode, setMeetingCode] = useState('')
+  const [sessionCode, setSessionCode] = useState('')
 
   const handleJoin = () => {
-    if (meetingCode.trim()) {
-      // Navigate to meeting page
-      window.location.href = '/meeting'
+    if (sessionCode.trim()) {
+      // Navigate to session page
+      window.location.href = '/session'
     }
   }
 
   const handleKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter' && meetingCode.trim()) {
+    if (e.key === 'Enter' && sessionCode.trim()) {
       handleJoin()
     }
   }
@@ -41,7 +41,7 @@ export default function JoinPage() {
         </Link>
 
         {/* Title */}
-        <h1 className="text-white text-xl font-medium">Join meeting</h1>
+        <h1 className="text-white text-xl font-medium">Join session</h1>
 
         {/* Spacer */}
         <div className="w-10"></div>
@@ -53,10 +53,10 @@ export default function JoinPage() {
           {/* Instruction Text */}
           <div className="text-center">
             <h2 className="text-white text-2xl font-semibold mb-2">
-              Enter meeting code
+              Enter session code
             </h2>
-            <p className="text-white/70 text-sm">
-              Enter the code provided by the meeting host
+            <p className="text-white/60 text-sm mt-1">
+              Enter the code provided by the session host
             </p>
           </div>
 
@@ -65,8 +65,8 @@ export default function JoinPage() {
             <input
               type="text"
               placeholder="Enter code"
-              value={meetingCode}
-              onChange={(e) => setMeetingCode(e.target.value.toUpperCase())}
+              value={sessionCode}
+              onChange={(e) => setSessionCode(e.target.value.toUpperCase())}
               onKeyPress={handleKeyPress}
               maxLength={10}
               className="w-full px-6 py-4 rounded-xl border-2 border-white/30 bg-black text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-tone-orange focus:ring-offset-2 focus:ring-offset-black focus:border-tone-orange text-center text-2xl font-semibold tracking-widest"
@@ -77,14 +77,14 @@ export default function JoinPage() {
           {/* Join Button */}
           <button
             onClick={handleJoin}
-            disabled={!meetingCode.trim()}
+            disabled={!sessionCode.trim()}
             className={`w-full py-4 px-6 rounded-xl font-medium text-lg transition-all duration-200 active:scale-[0.98] shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-black ${
-              meetingCode.trim()
+              sessionCode.trim()
                 ? 'bg-tone-orange text-white hover:bg-[#E55A2A] active:bg-[#CC4F22] focus:ring-tone-orange'
                 : 'bg-white/10 text-white/30 cursor-not-allowed'
             }`}
           >
-            Join
+            Join session
           </button>
         </div>
       </div>
@@ -94,7 +94,7 @@ export default function JoinPage() {
         <p className="text-white/50 text-xs">
           Don&apos;t have a code?{' '}
           <Link href="/home" className="text-tone-orange hover:underline">
-            Create a new meeting
+            Create a new session
           </Link>
         </p>
       </div>

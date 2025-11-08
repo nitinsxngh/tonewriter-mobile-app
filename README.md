@@ -1,6 +1,6 @@
 # Tone Writer - Mobile Web App
 
-A mobile-optimized web application built with Next.js 14, TypeScript, and Tailwind CSS. This app allows users to transcribe, summarize, and translate audio content through premium audio meetings.
+A mobile-optimized web application built with Next.js 14, TypeScript, and Tailwind CSS. This app allows users to transcribe, summarize, and translate audio content through premium audio sessions.
 
 ## Features
 
@@ -11,7 +11,7 @@ A mobile-optimized web application built with Next.js 14, TypeScript, and Tailwi
 - 🎨 Tailwind CSS for styling
 - 🔐 Phone number authentication with OTP
 - 🌍 Multi-country phone code support
-- 📞 Audio meeting capabilities with real-time visualization
+- 📞 Audio session capabilities with real-time visualization
 
 ## Getting Started
 
@@ -89,7 +89,7 @@ npm run dev
 ┌─────────────────────────────┐
 │  Home Dashboard             │  (/home)
 │  - 3D glowing sphere        │
-│  - New meeting button       │
+│  - New session button       │
 │  - Enter code to join btn   │
 └──────────────┬──────────────┘
                │
@@ -97,7 +97,7 @@ npm run dev
       │                 │
       ▼                 ▼
 ┌─────────────┐  ┌──────────────┐
-│ New Meeting │  │ Join Meeting │
+│ New Session │  │ Join Session │
 │ (Dropdown)  │  │ Code Entry   │  (/join)
 └─────┬───────┘  └──────┬───────┘
       │                 │
@@ -107,21 +107,21 @@ npm run dev
       │         │
       ▼         ▼
 ┌─────────────────────────────┐
-│  Meeting Code Bottom Sheet  │
-│  - Meeting code display     │
+│  Session Code Bottom Sheet  │
+│  - Session code display     │
 │  - Copy button              │
 │  - Share button             │
-│  - Join meeting button      │
-│  - Schedule meeting button  │
+│  - Join session button      │
+│  - Schedule session button  │
 └──────────────┬──────────────┘
                │
       ┌────────┴────────┐
       │                 │
       ▼                 ▼
 ┌─────────────┐  ┌──────────────┐
-│   Meeting   │  │   Schedule   │  (/schedule)
+│   Session   │  │   Schedule   │  (/schedule)
 │    Page     │  │     Page     │
-│  (/meeting) │  └──────────────┘
+│  (/session) │  └──────────────┘
 └─────────────┘
 ```
 
@@ -137,16 +137,16 @@ npm run dev
 4. **Profile Creation** (`/signup/profile`)
    - User supplies profile metadata and confirms setup, leading to the home dashboard.
 5. **Home Dashboard** (`/home`)
-   - Central hub offering quick actions: start a new meeting, schedule one, or enter an invite code.
-   - Sidebar reveals navigation shortcuts, search, and recent meetings.
-6. **Meeting Entry Paths**
-   - **Instant Meeting**: `New meeting → Get instant code` opens a bottom sheet with share/copy actions and then proceeds to `/meeting`.
-   - **Scheduled Meeting**: `New meeting → Schedule meeting` directs to `/schedule` to plan future sessions.
-   - **Join via Code**: `Enter code to join` or `/join` lets the user input an invite code, then transitions to `/meeting`.
-7. **Live Meeting** (`/meeting`)
+   - Central hub offering quick actions: start a new session, schedule one, or enter an invite code.
+   - Sidebar reveals navigation shortcuts, search, and recent sessions.
+6. **Session Entry Paths**
+   - **Instant Session**: `New session → Get instant code` opens a bottom sheet with share/copy actions and then proceeds to `/session`.
+   - **Scheduled Session**: `New session → Schedule session` directs to `/schedule` to plan future sessions.
+   - **Join via Code**: `Enter code to join` or `/join` lets the user input an invite code, then transitions to `/session`.
+7. **Live Session** (`/session`)
    - Real-time session controls, waveform visualization, participant management, audio recordings sheet, and sidebar access.
-8. **Post-Meeting** (`/transcript`)
-   - Ending the meeting routes to transcript review with tabs for raw text and summaries, sharing options, and recent-meeting sidebar.
+8. **Post-Session** (`/transcript`)
+   - Ending the session routes to transcript review with tabs for raw text and summaries, sharing options, and recent-session sidebar.
 
 ### Detailed Page Descriptions
 
@@ -189,35 +189,35 @@ npm run dev
 - Last Name input
 - Email input
 - Date of Birth (Day, Month, Year dropdowns)
-- Category selection (Meetings, Designs, Calls)
+- Category selection (Sessions, Designs, Calls)
 - Finish set-up button → `/home`
 
 #### 6. **Home Dashboard** (`/home`)
 - Header with hamburger menu, app title, profile icon
 - Large 3D glowing sphere visualization
-- **New meeting** button → Opens dropdown
-  - Get instant meeting code
-  - Schedule meeting → `/schedule`
+- **New session** button → Opens dropdown
+  - Get instant session code
+  - Schedule session → `/schedule`
 - **Enter code to join** button → `/join`
 - Footer with app description and "Learn more" link
 
-#### 7. **Join Meeting Page** (`/join`)
-- Meeting code input field
+#### 7. **Join Session Page** (`/join`)
+- Session code input field
 - Auto-uppercase conversion
-- Join button → `/meeting`
-- "Create a new meeting" link → `/home`
+- Join button → `/session`
+- "Create a new session" link → `/home`
 
-#### 8. **Schedule Meeting Page** (`/schedule`)
+#### 8. **Schedule Session Page** (`/schedule`)
 - Title input
 - Description input
 - Date input
 - Time range inputs (Start - End)
-- Category selection (Meetings, Designs, Calls)
+- Category selection (Sessions, Designs, Calls)
 - Schedule button
 
-#### 9. **Meeting Page** (`/meeting`)
-- Active meeting interface
-- Header: Back button, meeting title, profile icon
+#### 9. **Session Page** (`/session`)
+- Active session interface
+- Header: Back button, session title, profile icon
 - Central 3D glowing sphere with profile icon above
 - Animated audio waveform visualization (updates every 150ms)
 - Timer display (00:00:00 format)
@@ -226,28 +226,28 @@ npm run dev
   - End call button (center, red phone icon)
   - More options button (three dots)
 
-### Meeting Flow
+### Session Flow
 
-#### Creating a New Meeting
-1. User clicks **"New meeting"** on home page
+#### Creating a New Session
+1. User clicks **"New session"** on home page
 2. Dropdown appears with options:
-   - **Get instant meeting code** → Opens bottom sheet with meeting code
-   - **Schedule meeting** → Navigates to schedule page
-3. If "Get instant meeting code" selected:
+   - **Get instant session code** → Opens bottom sheet with session code
+   - **Schedule session** → Navigates to schedule page
+3. If "Get instant session code" selected:
    - Bottom sheet slides up with:
-     - Meeting code display (CODET001)
+     - Session code display (CODET001)
      - Copy button
      - Share button
-     - Join meeting button → `/meeting`
-     - Schedule meeting button → `/schedule`
+     - Join session button → `/session`
+     - Schedule session button → `/schedule`
      - Dismiss button
 
-#### Joining a Meeting
+#### Joining a Session
 1. User clicks **"Enter code to join"** on home page
 2. Navigates to `/join` page
-3. User enters meeting code
+3. User enters session code
 4. Clicks **Join** button
-5. Navigates to `/meeting` page
+5. Navigates to `/session` page
 
 ### Key Features
 
@@ -266,7 +266,7 @@ npm run dev
 - Resend functionality with 60-second timer
 - Visual countdown display
 
-#### Meeting Interface
+#### Session Interface
 - Real-time audio waveform visualization
 - Animated 3D sphere graphic
 - Live timer
@@ -291,11 +291,11 @@ npm run dev
 │   ├── home/
 │   │   └── page.tsx            # Home dashboard
 │   ├── join/
-│   │   └── page.tsx            # Join meeting page
+│   │   └── page.tsx            # Join session page
 │   ├── schedule/
-│   │   └── page.tsx            # Schedule meeting page
-│   └── meeting/
-│       └── page.tsx            # Active meeting page
+│   │   └── page.tsx            # Schedule session page
+│   └── session/
+│       └── page.tsx            # Active session page
 ├── components/
 │   ├── Logo.tsx                # Tone Writer logo component
 │   └── StatusBar.tsx           # Mobile status bar (unused)
@@ -370,11 +370,11 @@ npm start
 ## Future Enhancements
 
 - [ ] Backend API integration
-- [ ] Real-time audio meeting functionality
+- [ ] Real-time audio session functionality
 - [ ] User authentication with JWT tokens
-- [ ] Meeting history and recordings
+- [ ] Session history and recordings
 - [ ] Settings and preferences page
 - [ ] Profile editing functionality
 - [ ] Push notifications
 - [ ] Audio transcription features
-- [ ] Meeting scheduling calendar view
+- [ ] Session scheduling calendar view

@@ -5,20 +5,20 @@ import Image from 'next/image'
 import Link from 'next/link'
 
 export default function HomePage() {
-  const [showMeetingDropdown, setShowMeetingDropdown] = useState(false)
-  const [showMeetingSheet, setShowMeetingSheet] = useState(false)
+  const sessionCode = 'CODET001'
+  const [showSessionDropdown, setShowSessionDropdown] = useState(false)
+  const [showSessionSheet, setShowSessionSheet] = useState(false)
   const [showSidebar, setShowSidebar] = useState(false)
   const [activeTab, setActiveTab] = useState<'tonewriter' | 'audio'>('tonewriter')
-  const meetingCode = 'CODET001'
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText(meetingCode)
+    navigator.clipboard.writeText(sessionCode)
     // You can add a toast notification here
   }
 
   const handleGetInstantCode = () => {
-    setShowMeetingDropdown(false)
-    setShowMeetingSheet(true)
+    setShowSessionDropdown(false)
+    setShowSessionSheet(true)
   }
 
   return (
@@ -75,30 +75,30 @@ export default function HomePage() {
           <div className="w-full max-w-sm relative">
             {/* Buttons Container */}
             <div className="flex gap-3">
-              {/* New meeting Button */}
+              {/* New session Button */}
               <div className="flex-1 relative">
                 <button
-                  onClick={() => setShowMeetingDropdown(!showMeetingDropdown)}
+                  onClick={() => setShowSessionDropdown(!showSessionDropdown)}
                   className="w-full bg-tone-orange text-white font-medium py-3 px-4 rounded-xl hover:bg-[#E55A2A] active:bg-[#CC4F22] transition-all duration-200 active:scale-[0.98] shadow-lg focus:outline-none focus:ring-2 focus:ring-tone-orange focus:ring-offset-2 focus:ring-offset-black text-sm"
                 >
-                  New meeting
+                  New session
                 </button>
 
                 {/* Dropdown Menu */}
-                {showMeetingDropdown && (
+                {showSessionDropdown && (
                   <div className="absolute top-full left-0 right-0 mt-2 bg-[#5C4033] rounded-xl overflow-hidden z-30 shadow-lg border border-white/10">
                     <button
                       onClick={handleGetInstantCode}
                       className="w-full px-4 py-3 text-white text-left hover:bg-white/10 transition-colors duration-200 text-sm border-b border-white/10"
                     >
-                      Get instant meeting code
+                      Get instant session code
                     </button>
                     <Link
                       href="/schedule"
-                      onClick={() => setShowMeetingDropdown(false)}
+                      onClick={() => setShowSessionDropdown(false)}
                       className="block w-full px-4 py-3 text-white text-left hover:bg-white/10 transition-colors duration-200 text-sm"
                     >
-                      Schedule meeting
+                      Schedule session
                     </Link>
                   </div>
                 )}
@@ -118,12 +118,12 @@ export default function HomePage() {
         {/* Footer Content */}
         <div className="flex-shrink-0 text-center pb-4">
           <h2 className="text-lg font-semibold text-white mb-2 leading-tight">
-            Premium Audio meetings.
+            Premium Audio sessions.
             <br />
             Now free for everyone.
           </h2>
           <p className="text-xs text-white/70 mb-2 leading-relaxed">
-            We re-engineered the service that we built for secure business meetings, Tonewriter, to make it free and available for all.
+            We re-engineered the service that we built for secure business sessions, Tonewriter, to make it free and available for all.
           </p>
           <Link
             href="#"
@@ -135,10 +135,10 @@ export default function HomePage() {
       </div>
 
       {/* Backdrop Overlay for Dropdown */}
-      {showMeetingDropdown && (
+      {showSessionDropdown && (
         <div
           className="fixed inset-0 z-20"
-          onClick={() => setShowMeetingDropdown(false)}
+          onClick={() => setShowSessionDropdown(false)}
         />
       )}
 
@@ -151,29 +151,29 @@ export default function HomePage() {
       )}
 
       {/* Backdrop Overlay for Bottom Sheet */}
-      {showMeetingSheet && (
+      {showSessionSheet && (
         <div
           className="fixed inset-0 bg-black/50 z-40 transition-opacity duration-300"
-          onClick={() => setShowMeetingSheet(false)}
+          onClick={() => setShowSessionSheet(false)}
         />
       )}
 
       {/* Bottom Sheet */}
       <div
         className={`fixed bottom-0 left-0 right-0 max-w-md mx-auto bg-gradient-to-b from-[#5C4033] to-[#8B6F47] rounded-t-3xl px-6 pt-6 pb-8 z-50 transform transition-transform duration-300 ease-out ${
-          showMeetingSheet ? 'translate-y-0' : 'translate-y-full'
+          showSessionSheet ? 'translate-y-0' : 'translate-y-full'
         }`}
       >
         {/* Title */}
         <p className="text-white text-sm mb-4 text-center leading-relaxed">
-          Share this joining code with others that you want in the meeting
+          Share this joining code with others that you want in the session
         </p>
 
-        {/* Meeting Code Input */}
+        {/* Session Code Input */}
         <div className="relative mb-4">
           <input
             type="text"
-            value={meetingCode}
+            value={sessionCode}
             readOnly
             className="w-full px-4 py-3 pr-12 rounded-xl bg-black/30 border border-white/20 text-white text-center font-medium text-lg focus:outline-none"
           />
@@ -217,10 +217,10 @@ export default function HomePage() {
             Share
           </button>
 
-          {/* Join meeting Button */}
+          {/* Join session Button */}
           <Link
-            href="/meeting"
-            onClick={() => setShowMeetingSheet(false)}
+            href="/session"
+            onClick={() => setShowSessionSheet(false)}
             className="flex-1 border border-white text-white font-medium py-3 px-4 rounded-xl hover:bg-white/10 active:bg-white/20 transition-colors duration-200 active:scale-[0.98] focus:outline-none flex items-center justify-center gap-2 text-sm"
           >
             <svg
@@ -236,13 +236,13 @@ export default function HomePage() {
                 d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"
               />
             </svg>
-            Join meeting
+            Join session
           </Link>
         </div>
 
         {/* Dismiss Button */}
         <button
-          onClick={() => setShowMeetingSheet(false)}
+          onClick={() => setShowSessionSheet(false)}
           className="w-full text-white text-sm font-medium py-2 hover:opacity-80 transition-opacity"
         >
           dismiss

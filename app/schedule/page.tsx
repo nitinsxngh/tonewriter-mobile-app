@@ -4,14 +4,14 @@ import React, { useState } from 'react'
 import Link from 'next/link'
 
 export default function SchedulePage() {
-  const [title, setTitle] = useState('Ui Desing Meeting')
-  const [description, setDescription] = useState('Meeting with clients to discuss a project')
+  const [title, setTitle] = useState('UI Design Session')
+  const [description, setDescription] = useState('Session with clients to discuss a project')
   const [date, setDate] = useState('Monday, 20 2025')
   const [startTime, setStartTime] = useState('2:30 PM')
   const [endTime, setEndTime] = useState('3:40 PM')
-  const [selectedCategory, setSelectedCategory] = useState('Meetings')
+  const [selectedCategory, setSelectedCategory] = useState('Sessions')
 
-  const categories = ['Meetings', 'Designs', 'Calls']
+  const categories = ['Sessions', 'Designs', 'Calls']
 
   return (
     <main className="h-screen bg-black flex flex-col px-6 py-4 max-w-md mx-auto overflow-hidden">

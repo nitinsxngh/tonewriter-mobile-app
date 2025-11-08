@@ -3,7 +3,7 @@ import './globals.css'
 
 export const metadata: Metadata = {
   title: 'Tone Writer - Transcribe, Summarize, Translate',
-  description: 'Turn long conversations, lectures, or meetings into concise, actionable summaries in seconds.',
+  description: 'Turn long conversations, lectures, or sessions into concise, actionable summaries in seconds.',
   viewport: {
     width: 'device-width',
     initialScale: 1,

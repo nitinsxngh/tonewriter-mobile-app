@@ -29,7 +29,7 @@ export default function ProfilePage() {
       {/* Header Section */}
       <div className="flex-shrink-0 flex items-center justify-between mb-6">
         {/* Back Button */}
-        <Link href="/meeting" className="p-2 -ml-2 text-white focus:outline-none hover:opacity-80 transition-opacity">
+        <Link href="/session" className="p-2 -ml-2 text-white focus:outline-none hover:opacity-80 transition-opacity">
           <svg
             className="w-6 h-6"
             fill="none"

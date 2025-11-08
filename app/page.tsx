@@ -20,7 +20,7 @@ export default function Home() {
             Let&apos;s get started
           </h2>
           <p className="text-base md:text-lg text-white/90 font-light leading-relaxed px-2">
-            Turn long conversations, lectures, or meetings into concise, actionable summaries in seconds.
+            Turn long conversations, lectures, or sessions into concise, actionable summaries in seconds.
           </p>
         </div>
         

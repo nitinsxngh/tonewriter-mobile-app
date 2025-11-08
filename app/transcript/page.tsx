@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 
 const transcriptEntries = [
@@ -41,14 +41,28 @@ const tabs = ['Transcript', 'Summarized'] as const
 type Tab = (typeof tabs)[number]
 
 export default function TranscriptPage() {
-  const [activeTab, setActiveTab] = useState<Tab>('Transcript')
+  const [activeTranscriptTab, setActiveTranscriptTab] = useState<Tab>('Transcript')
+  const [showSidebar, setShowSidebar] = useState(false)
+  const [sidebarTab, setSidebarTab] = useState<'tonewriter' | 'audio'>('tonewriter')
+  const [isLoading, setIsLoading] = useState(true)
+
+  useEffect(() => {
+    const timer = setTimeout(() => setIsLoading(false), 1500)
+    return () => clearTimeout(timer)
+  }, [])
 
   return (
     <main className="h-screen bg-black flex flex-col px-6 py-4 max-w-md mx-auto overflow-hidden relative">
+      {isLoading && (
+        <div className="absolute inset-0 z-[200] bg-black flex flex-col items-center justify-center gap-4">
+          <div className="w-12 h-12 border-4 border-tone-orange/30 border-t-tone-orange rounded-full animate-spin"></div>
+          <p className="text-white/80 text-sm">Generating transcript…</p>
+        </div>
+      )}
       {/* Header */}
       <div className="flex-shrink-0 flex items-center justify-between mb-6">
-        <Link
-          href="/home"
+        <button
+          onClick={() => setShowSidebar(true)}
           className="p-2 -ml-2 text-white focus:outline-none hover:opacity-80 transition-opacity"
         >
           <svg
@@ -59,7 +73,7 @@ export default function TranscriptPage() {
           >
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
           </svg>
-        </Link>
+        </button>
 
         <div className="text-center">
           <h1 className="text-tone-orange text-xl font-medium">Tone writer</h1>
@@ -114,9 +128,9 @@ export default function TranscriptPage() {
           {tabs.map((tab) => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => setActiveTranscriptTab(tab)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-colors ${
-                activeTab === tab
+                activeTranscriptTab === tab
                   ? 'bg-gradient-to-r from-[#8B6F47] to-[#5C4033] text-white shadow-lg'
                   : 'text-white/60'
               }`}
@@ -149,6 +163,126 @@ export default function TranscriptPage() {
         </div>
       </div>
 
+      {/* Sidebar Backdrop */}
+      {showSidebar && (
+        <div
+          className="fixed inset-0 bg-black/50 z-[70] transition-opacity duration-300"
+          onClick={() => setShowSidebar(false)}
+        />
+      )}
+
+      {/* Sidebar */}
+      <div
+        className={`fixed top-0 left-0 h-full w-80 bg-gradient-to-b from-[#5C4033] to-[#3D2A1F] z-[80] transform transition-transform duration-300 ease-out max-w-[85vw] ${
+          showSidebar ? 'translate-x-0' : '-translate-x-full'
+        }`}
+      >
+        <div className="h-full flex flex-col px-4 pt-4 pb-6">
+          {/* Search Bar */}
+          <div className="mb-4">
+            <div className="relative">
+              <svg
+                className="absolute left-3 top-1/2 transform -translate-y-1/2 w-5 h-5 text-white/60"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={2}
+                  d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"
+                />
+              </svg>
+              <input
+                type="text"
+                placeholder="Search"
+                className="w-full pl-10 pr-4 py-3 rounded-xl bg-white/10 border border-white/20 text-white placeholder-white/50 focus:outline-none focus:ring-2 focus:ring-tone-orange/50 text-sm"
+              />
+            </div>
+          </div>
+
+          {/* Tab Navigation */}
+          <div className="flex gap-2 mb-6">
+            <button
+              onClick={() => setSidebarTab('tonewriter')}
+              className={`flex-1 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                sidebarTab === 'tonewriter'
+                  ? 'bg-[#8B6F47] text-white'
+                  : 'bg-white/10 text-white/70'
+              }`}
+            >
+              Tone writer
+            </button>
+            <button
+              onClick={() => setSidebarTab('audio')}
+              className={`flex-1 px-4 py-2.5 rounded-lg font-medium text-sm transition-colors ${
+                sidebarTab === 'audio'
+                  ? 'bg-[#8B6F47] text-white'
+                  : 'bg-white/10 text-white/70'
+              }`}
+            >
+              Audio
+            </button>
+          </div>
+
+          {/* Recent Section */}
+          <div className="flex-1 overflow-y-auto">
+            <h2 className="text-white font-bold text-lg mb-4">Recent</h2>
+            <div className="space-y-2">
+              <button className="w-full px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 transition-colors flex items-center gap-3 text-left">
+                <svg
+                  className="w-6 h-6 text-white/80 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <span className="text-white text-sm font-medium">Client design discussion</span>
+              </button>
+              <button className="w-full px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 transition-colors flex items-center gap-3 text-left">
+                <svg
+                  className="w-6 h-6 text-white/80 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <span className="text-white text-sm font-medium">Hunnid labs marketing</span>
+              </button>
+              <button className="w-full px-4 py-3 rounded-xl bg-white/10 hover:bg-white/15 transition-colors flex items-center gap-3 text-left">
+                <svg
+                  className="w-6 h-6 text-white/80 flex-shrink-0"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={2}
+                    d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"
+                  />
+                </svg>
+                <span className="text-white text-sm font-medium">Digital marketing plan</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+
       {/* Footer Controls */}
       <div className="flex-shrink-0 pt-4">
         <div className="grid grid-cols-2 gap-3 mb-4">
@@ -173,9 +307,11 @@ export default function TranscriptPage() {
           </div>
         </div>
 
-        <button className="w-full bg-gradient-to-r from-[#8B6F47] to-[#5C4033] text-white font-medium py-3 rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-200">
-          Done
-        </button>
+        <Link href="/home" className="block">
+          <span className="block w-full bg-gradient-to-r from-[#8B6F47] to-[#5C4033] text-white text-center font-medium py-3 rounded-full hover:opacity-90 active:scale-[0.98] transition-all duration-200">
+            Done
+          </span>
+        </Link>
       </div>
     </main>
   )
